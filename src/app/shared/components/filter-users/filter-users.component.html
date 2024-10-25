@@ -1,0 +1,16 @@
+<div class="p-field p-grid pt-2">
+  <div class="p-col-12 p-md-6 pb-2">
+    <p-dropdown
+      [options]="users"
+      [(ngModel)]="selectedUser"
+      optionLabel="email"
+      placeholder="Filtrar por usuario"
+      (onChange)="onUserSelect($event)"
+      class="w-full" 
+    >
+      <ng-template let-user pTemplate="selectedItem">
+        {{ user ? user.email : "Todos" }}
+      </ng-template>
+    </p-dropdown>
+  </div>
+</div>

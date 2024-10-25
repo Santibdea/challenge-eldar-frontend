@@ -1,0 +1,47 @@
+<p-table
+[value]="posts"
+[paginator]="true"
+[rows]="5"
+responsiveLayout="scroll"
+class="posts-table"
+>
+<ng-template pTemplate="header">
+  <tr>
+    <th>Titulo</th>
+    <th>Cuerpo</th>
+    <th>Acciones</th>
+  </tr>
+</ng-template>
+<ng-template pTemplate="body" let-post>
+  <tr>
+    <td>{{ post.title }}</td>
+    <td>{{ post.body }}</td>
+    <td>
+    @if(role == 'admin'){
+      <ng-container>
+        <div class="pb-2">
+        <button
+          pButton
+          icon="pi pi-pencil"
+          class="p-button-rounded p-button-warning"
+          (click)="onEdit(post)"
+        ></button>
+      </div>
+      <div class="pt-2">
+        <button
+          pButton
+          icon="pi pi-trash"
+          class="p-button-rounded p-button-danger"
+          (click)="onDelete(post.id)"
+        ></button>
+      </div>
+      </ng-container>
+    } @else {
+      <ng-template #noPermission>
+        <p>No posees permisos suficientes</p>
+      </ng-template>
+    }
+    </td>
+  </tr>
+</ng-template>
+</p-table>

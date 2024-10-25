@@ -1,0 +1,28 @@
+<p-toolbar class="toolbar-gradient text-white shadow-2">
+  <div class="p-toolbar-group-left flex align-items-center">
+    <h1 class="text-xl font-semibold mr-2">Hola {{ email }}, bienvenido a mi Eldar Challenge</h1>
+    @if(avatar){
+      <ng-container *ngIf="avatar">
+        <ion-avatar>
+          <img [src]="avatar" alt="User Avatar" class="rounded-circle border-2 border-white" style="width: 40px; height: 40px;">
+        </ion-avatar>
+      </ng-container>
+    }
+  </div>
+  <div class="p-toolbar-group-right flex align-items-center">
+    <button
+      pButton
+      label="Cerrar Sesión"
+      icon="pi pi-sign-out"
+      class="p-button-danger mr-2"
+      (click)="handleLogout()"
+    ></button>
+    <button
+      pButton
+      label="Tomar Foto"
+      icon="pi pi-plus"
+      class="p-button-info"
+      (click)="takePicture()"
+    ></button>
+  </div>
+</p-toolbar>

@@ -1,0 +1,92 @@
+<app-header></app-header>
+
+<div class="container mx-auto px-4 py-8">
+  <div class="dashboard-header text-center sm:text-left mb-6">
+    <h2 class="text-3xl font-bold text-white">{{ role === "admin" ? "ADMIN Dashboard" : "USER Dashboard" }}</h2>
+  </div>
+
+  <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+    
+    <app-search-posts (filter)="applyFilter($event)"></app-search-posts>
+
+    @if(role == 'admin') {
+    <div class="p-col-4 p-md-6" style="text-align: right">
+      <button
+        pButton
+        label="Nuevo Post"
+        icon="pi pi-plus"
+        (click)="openNewPostDialog()"
+      ></button>
+    </div>
+    }
+  </div>
+
+  <app-filter-users
+  [users]="users"
+  [(selectedUser)]="selectedUser"
+  (selectedUserChange)="onUserSelect($event)">
+</app-filter-users>
+
+  <div class="p-col-12">
+    <app-posts-table
+    [posts]="filteredPosts"
+    [role]="role"
+    (edit)="editPost($event)"
+    (delete)="confirmDelete($event)"
+    ></app-posts-table>
+    <p-confirmDialog></p-confirmDialog>
+  </div>
+
+  <!-- Dialog para Crear/Editar Post -->
+  @if(role == 'admin'){
+  <p-dialog
+    [(visible)]="postDialog"
+    header="{{ editMode ? 'Editar Post' : 'Nuevo Post' }}"
+    [modal]="true"
+    [closable]="false"
+    [style]="{ width: '400px' }"
+  >
+    <form [formGroup]="postForm">
+      <div class="p-fluid">
+        <div class="p-field">
+          <label for="title">Titulo</label>
+          <input id="title" type="text" pInputText formControlName="title" />
+          @if(postForm.get('title')?.invalid && postForm.get('title')?.touched){
+          <small>Se requiere minimo 5 caracteres</small>
+          }
+        </div>
+        <div class="p-field">
+          <label for="body">Cuerpo</label>
+          <textarea
+            id="body"
+            rows="5"
+            pInputTextarea
+            formControlName="body"
+          ></textarea>
+          @if(postForm.get('body')?.invalid && postForm.get('body')?.touched){
+          <small>Cuerpo requiere minimo 10 caracteres.</small>
+          }
+        </div>
+      </div>
+
+      <p-footer>
+        <button
+          pButton
+          label="Cancelar"
+          icon="pi pi-times"
+          class="p-button-text"
+          (click)="hideDialog()"
+        ></button>
+        <button
+          pButton
+          label="{{ editMode ? 'Actualizar' : 'Crear' }}"
+          icon="pi pi-check"
+          (click)="editMode ? updatePost() : createPost()"
+          [disabled]="postForm.invalid"
+        ></button>
+      </p-footer>
+    </form>
+  </p-dialog>
+
+  }
+</div>

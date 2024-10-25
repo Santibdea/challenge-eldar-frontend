@@ -1,0 +1,14 @@
+::ng-deep .toolbar-gradient {
+  background: linear-gradient(to right, #3B82F6, #9333EA) !important;
+  min-height: 60px;
+  width: 100vw;
+  display: flex;
+}
+
+::ng-deep .toolbar-gradient .p-toolbar {
+  background: transparent !important; /* Asegúrate de que no haya un fondo por defecto que bloquee el degradado */
+}
+
+::ng-deep .p-toolbar.p-component {
+  width: 100vw;
+}

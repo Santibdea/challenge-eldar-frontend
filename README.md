@@ -37,11 +37,11 @@ src/
 │   ├── core/                   # Núcleo de la aplicación
 │   │   ├── guards/             # Guardias de rutas para proteger el acceso a ciertas páginas
 │   │   ├── interceptors/       # Interceptores para manejar peticiones HTTP
-│   │   ├── interfaces/         # Definición de interfaces compartidas
-│   │   └── services/           # Servicios compartidos
-│   │       ├── generic/        # Servicios genéricos reutilizables
-│   │       ├── private/        # Servicios específicos para la sección privada
-│   │       └── public/         # Servicios específicos para la sección pública
+│   ├── interfaces/         # Definición de interfaces compartidas
+│   └── services/           # Servicios compartidos
+│   │   ├── generic/        # Servicios genéricos reutilizables
+│   │   ├── private/        # Servicios específicos para la sección privada
+│   │   └── public/         # Servicios específicos para la sección pública
 │   │
 │   ├── shared/                 # Recursos compartidos (componentes, pipes, etc.)
 │   │   ├── components/         # Componentes de la aplicación
